@@ -30,6 +30,7 @@ def parse_detail(source,item):
 def main():
     rss=E.fromstring(get(RSS).strip());items=[]
     approved=json.loads((ROOT/'data/approved-programs.json').read_text())
+    (ROOT/'review-assets').mkdir(parents=True,exist_ok=True)
     if len(rss.findall('./channel/item'))<1:raise ValueError('Unexpected empty RSS; preserve successful data')
     for n in rss.findall('./channel/item'):
         title=clean(n.findtext('title') or '');link=n.findtext('link') or ''
