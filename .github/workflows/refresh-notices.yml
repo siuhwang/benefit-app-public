@@ -28,3 +28,25 @@ jobs:
           git add -- data/feed.json
           git commit -m 'Refresh reviewed public support notice metadata'
           git push origin HEAD:main
+  refresh-learning:
+    needs: refresh
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Verify learning metadata parser
+        run: python3 -m unittest discover -s scripts -p 'test_learning_feed.py'
+      - name: Refresh reviewed learning voucher facts
+        run: python3 scripts/refresh-learning-feed.py
+      - name: Publish only the reviewed public learning feed
+        run: |
+          if git diff --quiet -- data/learning-feed.json; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -- data/learning-feed.json
+          git commit -m 'Refresh reviewed public learning voucher metadata'
+          git pull --rebase origin main
+          git push origin HEAD:main
