@@ -1,0 +1,30 @@
+name: Refresh public support notice metadata
+on:
+  schedule:
+    - cron: '23 */2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reviewed-official-notices
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Fetch approved public metadata
+        run: python3 scripts/refresh-feed.py
+      - name: Validate source, freshness, schema and allowlist
+        run: python3 scripts/validate-feed.py
+      - name: Publish only the non-personal public feed
+        run: |
+          if git diff --quiet -- data/feed.json; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -- data/feed.json
+          git commit -m 'Refresh reviewed public support notice metadata'
+          git push origin HEAD:main
