@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "source": "https://www.k-startup.go.kr/web/contents/rss/bizpbanc-ongoing.do",
+  "generatedAt": "2026-10-17T09:19:46.462472+00:00",
+  "scannedCount": 7,
+  "totalRssCount": 227,
+  "notices": [
+    {
+      "id": "179500",
+      "title": "2026년 전남광주 제3기「지역자원 연계 청년창업 지원사업」 모집 공고",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179500",
+      "field": "사업화",
+      "region": "전남광주통합특별시",
+      "stages": "예비창업자, 1년미만, 2년미만, 3년미만, 5년미만, 7년미만",
+      "target": "일반인, 일반기업",
+      "organization": "(재)전남정보문화산업진흥원",
+      "organizationType": "공공기관",
+      "startDate": "2026-10-13",
+      "endDate": "2026-10-30",
+      "endTime": "17:00",
+      "publishedAt": "2026-10-12T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "business"
+      ],
+      "supportKind": "사업비 지원",
+      "summary": "지역자원 조사와 사업화 등 단계별 평가를 거쳐 활동비·사업비를 지원해요. 창업지역 이전·유지 등 세부 의무를 확인해요."
+    },
+    {
+      "id": "179486",
+      "title": "2026년 남구다운 청년 창업 지원사업 통합공고(수정)",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179486",
+      "field": "사업화",
+      "region": "대구광역시",
+      "stages": "전체",
+      "target": "일반인, 일반기업, 1인 창조기업",
+      "organization": "대구경북고용복지연구원",
+      "organizationType": "민간",
+      "startDate": "2026-10-02",
+      "endDate": "2026-11-12",
+      "endTime": "18:00",
+      "publishedAt": "2026-10-11T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "business"
+      ],
+      "supportKind": "사업비 지원",
+      "summary": "대구 남구 청년 창업의 사업화 비용 등을 지원해요. 유형별 조건과 자부담 5% 이상 요건을 원문에서 확인해요."
+    },
+    {
+      "id": "179431",
+      "title": "[한국도로공사] 2026년 상생형 창업, 벤처기업 지원사업",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179431",
+      "field": "사업화",
+      "region": "전국",
+      "stages": "예비창업자, 7년미만",
+      "target": "일반기업, 1인 창조기업",
+      "organization": "재단법인밴드",
+      "organizationType": "민간",
+      "startDate": "2026-10-06",
+      "endDate": "2026-10-28",
+      "endTime": "18:00",
+      "publishedAt": "2026-10-05T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "business",
+        "jobs"
+      ],
+      "supportKind": "사업비·채용비 지원",
+      "summary": "사업화 비용 또는 신규 채용 인건비를 지원하는 별도 분야가 있어요. 기업 요건과 채용·보험 조건을 확인해요."
+    },
+    {
+      "id": "179417",
+      "title": "2026년 중소기업 수출 부대비용 지원사업",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179417",
+      "field": "판로ㆍ해외진출",
+      "region": "전국",
+      "stages": "1년미만, 2년미만, 3년미만, 5년미만, 7년미만",
+      "target": "일반기업, 1인 창조기업",
+      "organization": "한국고용정보원",
+      "organizationType": "공공기관",
+      "startDate": "2026-10-01",
+      "endDate": "2026-11-30",
+      "endTime": "23:59",
+      "publishedAt": "2026-10-01T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "export"
+      ],
+      "supportKind": "수출 비용 지원",
+      "summary": "송금 수수료·수출보험 자부담·견본품 운송비 중 비용을 지원해요. 인정 비용 발생기간과 신청기간은 달라요."
+    },
+    {
+      "id": "179018",
+      "title": "2026년 중동상황 대응 「수출위기 극복 물류지원금」 지원사업 모집",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179018",
+      "field": "판로ㆍ해외진출",
+      "region": "서울특별시",
+      "stages": "전체",
+      "target": "일반기업, 1인 창조기업",
+      "organization": "서울경제진흥원",
+      "organizationType": "공공기관",
+      "startDate": "2026-08-20",
+      "endDate": "2026-12-31",
+      "endTime": "18:00",
+      "publishedAt": "2026-08-24T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "export"
+      ],
+      "supportKind": "물류 비용 지원",
+      "summary": "국제 물류 차질 등에 따른 수출 운송비와 관련 물류비를 지원해요. 수출자가 부담한 인정 비용인지 확인해요."
+    },
+    {
+      "id": "176739",
+      "title": "2026년 기술이전 지원사업 (서울 Tech trade-on 프로그램) 참여기업 모집",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=176739",
+      "field": "사업화",
+      "region": "서울특별시",
+      "stages": "7년미만",
+      "target": "전체",
+      "organization": "키스트이노베이션",
+      "organizationType": "민간",
+      "startDate": "2026-03-16",
+      "endDate": "2026-12-31",
+      "endTime": "23:59",
+      "publishedAt": "2026-03-16T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "technology"
+      ],
+      "supportKind": "기술이전료 지원",
+      "summary": "공공기술 이전료 지원 공고예요. 기술이전 전에 사전 신청·협의가 필요하고 부가세는 별도 부담이에요."
+    },
+    {
+      "id": "176296",
+      "title": "[인천지식재산센터] IP디딤돌 아이디어 권리화 지원사업 모집 공고",
+      "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=176296",
+      "field": "멘토링ㆍ컨설팅ㆍ교육",
+      "region": "인천광역시",
+      "stages": "예비창업자",
+      "target": "대학생, 일반인, 1인 창조기업",
+      "organization": "인천상공회의소",
+      "organizationType": "민간",
+      "startDate": "2026-02-11",
+      "endDate": "2026-10-30",
+      "endTime": "18:00",
+      "publishedAt": "2026-02-10T15:00:00+00:00",
+      "sourceLicense": "KOGL1",
+      "categories": [
+        "technology"
+      ],
+      "supportKind": "특허 서비스 비용 지원",
+      "summary": "예비창업자의 아이디어 권리화 비용을 지원해요. 현금 입금이 아닌 서비스 지원이며 자부담·관납료 조건이 있어요."
+    }
+  ]
+}

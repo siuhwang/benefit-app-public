@@ -1,0 +1,1 @@
+Public factual metadata from K-Startup announcements, reviewed for business or cost support. Source: Startup Promotion Agency K-Startup; KOGL Type 1, attribution required. Individual original URLs and checked time are in feed.json. No application eligibility or cash payment is guaranteed. No author names, contacts, attachments or original announcement prose are redistributed.
