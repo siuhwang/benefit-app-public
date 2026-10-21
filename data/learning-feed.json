@@ -1,17 +1,32 @@
 {
   "version": 1,
   "source": "https://www.lllcard.kr/main",
-  "generatedAt": "2026-10-21T00:42:30.053239+00:00",
-  "sourceSha256": "9fe2f0c447eb569ad8d7875a7076ad22791a764398983b9c3fdd6b4050d34eb0",
+  "generatedAt": "2026-10-21T07:51:04.634523+00:00",
+  "sourceSha256": "00840ea7a1b62f32aeaa2c9e843865ff4dfe2922719afe456a8e3b22018c9155",
   "scannedCount": 131,
   "reviewedCount": 17,
   "notices": [
     {
-      "id": "gv25gwVbClYjg1aK+Hcdrg==",
-      "region": "대전광역시",
-      "title": "2026 AI·디지털 평생교육이용권 2차 (우수이용자)",
+      "id": "ws+/MrFcP3nhdNhkxQ+BZg==",
+      "region": "전남광주통합특별시(구)광주광역시",
+      "title": "2026 AI·디지털 평생교육이용권 3차 (우수이용자)",
       "kind": "excellent",
       "type": "digital",
+      "amount": 350000,
+      "startAt": "2026-10-21T10:00:00+09:00",
+      "endAt": "2026-10-27T18:00:00+09:00",
+      "birthYearMax": null,
+      "usageCutoff": "2026-10-19",
+      "minimumUsed": 350000,
+      "income": "일반이용자 신청 당시 판정된 소득요건",
+      "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
+    },
+    {
+      "id": "bPa9O/3oawz8u/+x7Liuwg==",
+      "region": "대전광역시",
+      "title": "2026 노인 평생교육이용권 2차 (우수이용자)",
+      "kind": "excellent",
+      "type": "senior",
       "amount": 350000,
       "startAt": "2026-10-19T10:00:00+09:00",
       "endAt": "2026-10-30T17:00:00+09:00",
@@ -22,11 +37,11 @@
       "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
     },
     {
-      "id": "bPa9O/3oawz8u/+x7Liuwg==",
+      "id": "gv25gwVbClYjg1aK+Hcdrg==",
       "region": "대전광역시",
-      "title": "2026 노인 평생교육이용권 2차 (우수이용자)",
+      "title": "2026 AI·디지털 평생교육이용권 2차 (우수이용자)",
       "kind": "excellent",
-      "type": "senior",
+      "type": "digital",
       "amount": 350000,
       "startAt": "2026-10-19T10:00:00+09:00",
       "endAt": "2026-10-30T17:00:00+09:00",
@@ -52,21 +67,6 @@
       "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
     },
     {
-      "id": "cCYPs8GhapGcT9vICtFuTQ==",
-      "region": "전북특별자치도",
-      "title": "2026 AI·디지털 평생교육이용권 4차",
-      "kind": "new",
-      "type": "digital",
-      "amount": 350000,
-      "startAt": "2026-10-14T10:00:00+09:00",
-      "endAt": "2026-10-23T18:00:00+09:00",
-      "birthYearMax": 1996,
-      "usageCutoff": null,
-      "minimumUsed": null,
-      "income": "소득무관",
-      "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
-    },
-    {
       "id": "C/KwWdsOFzZxcP8TWnZx7w==",
       "region": "경상북도",
       "title": "2026 노인 평생교육이용권 2차 (우수이용자)",
@@ -79,6 +79,21 @@
       "usageCutoff": "2026-09-30",
       "minimumUsed": 350000,
       "income": "일반이용자 신청 당시 판정된 소득요건",
+      "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
+    },
+    {
+      "id": "cCYPs8GhapGcT9vICtFuTQ==",
+      "region": "전북특별자치도",
+      "title": "2026 AI·디지털 평생교육이용권 4차",
+      "kind": "new",
+      "type": "digital",
+      "amount": 350000,
+      "startAt": "2026-10-14T10:00:00+09:00",
+      "endAt": "2026-10-23T18:00:00+09:00",
+      "birthYearMax": 1996,
+      "usageCutoff": null,
+      "minimumUsed": null,
+      "income": "소득무관",
       "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
     },
     {
@@ -107,21 +122,6 @@
       "endAt": "2026-10-31T18:00:00+09:00",
       "birthYearMax": null,
       "usageCutoff": "2026-09-30",
-      "minimumUsed": 350000,
-      "income": "일반이용자 신청 당시 판정된 소득요건",
-      "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
-    },
-    {
-      "id": "ws+/MrFcP3nhdNhkxQ+BZg==",
-      "region": "전남광주통합특별시(구)광주광역시",
-      "title": "2026 AI·디지털 평생교육이용권 3차 (우수이용자)",
-      "kind": "excellent",
-      "type": "digital",
-      "amount": 350000,
-      "startAt": "2026-10-21T10:00:00+09:00",
-      "endAt": "2026-10-27T18:00:00+09:00",
-      "birthYearMax": null,
-      "usageCutoff": "2026-10-19",
       "minimumUsed": 350000,
       "income": "일반이용자 신청 당시 판정된 소득요건",
       "officialListUrl": "https://www.lllcard.kr/main/vcReq/vcList.do"
