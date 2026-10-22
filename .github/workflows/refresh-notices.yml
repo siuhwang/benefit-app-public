@@ -50,3 +50,30 @@ jobs:
           git commit -m 'Refresh reviewed public learning voucher metadata'
           git pull --rebase origin main
           git push origin HEAD:main
+  publish-firebase:
+    needs: [refresh, refresh-learning]
+    if: always() && (needs.refresh.result == 'success' || needs.refresh-learning.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - name: Verify live site preservation guards
+        run: python3 -m unittest discover -s scripts -p 'test_hosting_preservation.py'
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          project_id: paran-5dcac
+          workload_identity_provider: projects/757082150706/locations/global/workloadIdentityPools/benefit-feed-github/providers/github-main
+          service_account: benefit-feed-publisher@paran-5dcac.iam.gserviceaccount.com
+          token_format: access_token
+          access_token_lifetime: 300s
+          create_credentials_file: false
+      - name: Publish only two public feeds to existing Firebase Hosting
+        env:
+          FIREBASE_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: python3 scripts/publish-firebase-feeds.py

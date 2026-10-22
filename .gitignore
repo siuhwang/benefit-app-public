@@ -1,3 +1,4 @@
 review-assets/
 **/__pycache__/
 *.tmp
+gha-creds-*.json
