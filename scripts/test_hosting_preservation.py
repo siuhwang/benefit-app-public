@@ -8,6 +8,14 @@ spec.loader.exec_module(publisher)
 
 
 class LiveSitePreservation(unittest.TestCase):
+    def test_accepts_canonical_and_project_qualified_live_versions_for_the_same_site(self):
+        self.assertEqual(publisher.version_path('projects/757082150706/sites/paran-5dcac/versions/live1'),
+                         'sites/paran-5dcac/versions/live1')
+        self.assertEqual(publisher.version_path('sites/paran-5dcac/versions/live1'),
+                         'sites/paran-5dcac/versions/live1')
+        with self.assertRaises(ValueError):
+            publisher.version_path('sites/unrelated-site/versions/live1')
+
     def setUp(self):
         self.targets = {name: 'new-' + str(i) for i, name in enumerate(publisher.TARGETS)}
         self.before = {'/index.html': 'home', '/apps-in-toss-admin/admin-data.json': 'private-stub',

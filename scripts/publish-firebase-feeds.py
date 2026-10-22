@@ -8,6 +8,7 @@ import os
 import time
 import urllib.request
 import urllib.parse
+import urllib.error
 
 ROOT = Path(__file__).resolve().parents[1]
 API = 'https://firebasehosting.googleapis.com/v1beta1/'
@@ -20,6 +21,13 @@ TARGETS = {
 
 def digest(data):
     return hashlib.sha256(data).hexdigest()
+
+
+def version_path(name):
+    parts = name.strip('/').split('/')
+    if len(parts) < 4 or parts[-4:-1] != ['sites', SITE, 'versions']:
+        raise ValueError('Unexpected Hosting version site')
+    return '/'.join(parts[-4:])
 
 
 def validate_inventory(before, after, targets):
@@ -53,12 +61,19 @@ class Hosting:
             'User-Agent': 'BenefitReviewedFeedPublisher/1.0',
         })
         # Never automatically repeat a write with an unknown outcome.
-        with urllib.request.urlopen(request, timeout=45) as response:
-            body = response.read(12000000)
-            return {} if upload or not body else json.loads(body)
+        try:
+            with urllib.request.urlopen(request, timeout=45) as response:
+                body = response.read(12000000)
+                return {} if upload or not body else json.loads(body)
+        except urllib.error.HTTPError as error:
+            try:
+                message = json.loads(error.read(20000)).get('error', {}).get('message', 'API rejected request')
+            except (ValueError, AttributeError):
+                message = 'API rejected request'
+            raise RuntimeError(f'Hosting {method} HTTP {error.code}: {message[:1500]}') from None
 
     def live(self):
-        return self.request('GET', f'projects/-/sites/{SITE}/channels/live')['release']['version']
+        return self.request('GET', f'sites/{SITE}/channels/live')['release']['version']
 
     def files(self, version):
         result = {}
@@ -67,7 +82,7 @@ class Hosting:
             query = {'pageSize': 1000}
             if page:
                 query['pageToken'] = page
-            data = self.request('GET', version + '/files?' + urllib.parse.urlencode(query))
+            data = self.request('GET', version_path(version) + '/files?' + urllib.parse.urlencode(query))
             for item in data.get('files', []):
                 name = '/' + item['path'].lstrip('/')
                 if name in result or not item.get('hash'):
@@ -78,8 +93,8 @@ class Hosting:
                 return result
 
     def clone(self, baseline):
-        operation = self.request('POST', f'projects/-/sites/{SITE}/versions:clone', {
-            'sourceVersion': baseline['name'], 'finalize': False,
+        operation = self.request('POST', f'sites/{SITE}/versions:clone', {
+            'sourceVersion': version_path(baseline['name']), 'finalize': False,
         })
         for _ in range(100):
             result = self.request('GET', operation['name'])
@@ -129,7 +144,7 @@ def publish(client, dry_run=False):
     validate_inventory(before, after, target_hashes)
     if client.live()['name'].split('/')[-1] != baseline['name'].split('/')[-1]:
         raise ValueError('Another deployment changed live; this prepared version was not released')
-    release = client.request('POST', f'projects/-/sites/{SITE}/channels/live/releases?' +
+    release = client.request('POST', f'sites/{SITE}/channels/live/releases?' +
                              urllib.parse.urlencode({'versionName': clone['name']}), {
                                  'message': 'Refresh two reviewed public benefit feeds; preserve all other live Hosting files',
                              })

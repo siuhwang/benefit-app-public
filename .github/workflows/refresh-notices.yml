@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: '23 */2 * * *'
   workflow_dispatch:
+    inputs:
+      publish_only:
+        description: Publish the last reviewed feeds without recollecting official sources
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -10,6 +15,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
+    if: github.event_name != 'workflow_dispatch' || !inputs.publish_only
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -30,7 +36,7 @@ jobs:
           git push origin HEAD:main
   refresh-learning:
     needs: refresh
-    if: always()
+    if: always() && (github.event_name != 'workflow_dispatch' || !inputs.publish_only)
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -52,7 +58,7 @@ jobs:
           git push origin HEAD:main
   publish-firebase:
     needs: [refresh, refresh-learning]
-    if: always() && (needs.refresh.result == 'success' || needs.refresh-learning.result == 'success')
+    if: always() && (inputs.publish_only || needs.refresh.result == 'success' || needs.refresh-learning.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 8
     permissions:
