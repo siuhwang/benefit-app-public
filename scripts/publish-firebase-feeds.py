@@ -43,6 +43,50 @@ def validate_inventory(before, after, targets):
             raise ValueError('Published feed bytes differ')
 
 
+def verify_public_feeds(original, version, opener=None, sleep=None):
+    """Retry only public reads while the confirmed release reaches CDN edges."""
+    opener = opener or urllib.request.urlopen
+    sleep = sleep or time.sleep
+    version_id = version_path(version).split('/')[-1]
+    delays = (0, 1, 2, 4, 8)
+    for target, expected in original.items():
+        if target not in TARGETS:
+            raise ValueError('Unexpected public verification path')
+        last_error = 'No response'
+        for attempt, delay in enumerate(delays):
+            if delay:
+                sleep(delay)
+            # Query strings are part of the Hosting CDN cache key. Each read
+            # must avoid caching a temporarily stale post-release response.
+            query = urllib.parse.urlencode({
+                'hosting_version': version_id,
+                'verify': f'{time.time_ns()}-{attempt}',
+            })
+            request = urllib.request.Request(
+                'https://paran-5dcac.web.app' + target + '?' + query,
+                headers={'Cache-Control': 'no-cache'},
+            )
+            try:
+                with opener(request, timeout=15) as response:
+                    actual = response.read(len(expected) + 1)
+                    if response.status == 200 and actual == expected:
+                        break
+                    last_error = f'HTTP {response.status}, received SHA256 {digest(actual)}'
+            except urllib.error.HTTPError as error:
+                last_error = f'HTTP {error.code}'
+                if error.code not in (408, 429) and error.code < 500:
+                    raise RuntimeError(
+                        f'Public Firebase feed verification rejected for {target}: {last_error}'
+                    ) from None
+            except (urllib.error.URLError, TimeoutError) as error:
+                last_error = type(error).__name__
+        else:
+            raise ValueError(
+                f'Public Firebase feed verification failed for {target} at version {version_id} '
+                f'after {len(delays)} read attempts ({last_error}); do not repeat the release'
+            )
+
+
 class Hosting:
     def __init__(self, token):
         if not token:
@@ -126,8 +170,12 @@ def publish(client, dry_run=False):
     if len(before) != int(baseline['fileCount']):
         raise ValueError('Incomplete live inventory')
     summary = {'baseline': baseline['name'], 'targetCount': 2, 'liveFilesPreserved': len(before) - 2}
-    if dry_run or all(before.get(name) == sha for name, sha in target_hashes.items()):
-        return dict(summary, mode='dry-run' if dry_run else 'already-current', released=False)
+    if dry_run:
+        return dict(summary, mode='dry-run', released=False)
+    if all(before.get(name) == sha for name, sha in target_hashes.items()):
+        verify_public_feeds(original, baseline['name'])
+        return dict(summary, mode='already-current', released=False, version=baseline['name'],
+                    configPreserved=True, publicBytesVerified=True)
     clone = client.clone(baseline)
     if clone.get('config', {}) != baseline.get('config', {}):
         raise ValueError('Cloned Hosting configuration differs')
@@ -150,12 +198,7 @@ def publish(client, dry_run=False):
                              })
     if client.live()['name'].split('/')[-1] != clone['name'].split('/')[-1]:
         raise ValueError('Release outcome not confirmed; inspect before retrying')
-    for target, expected in original.items():
-        request = urllib.request.Request('https://paran-5dcac.web.app' + target,
-                                         headers={'Cache-Control': 'no-cache'})
-        with urllib.request.urlopen(request, timeout=30) as response:
-            if response.status != 200 or response.read() != expected:
-                raise ValueError('Public Firebase feed verification failed')
+    verify_public_feeds(original, clone['name'])
     return dict(summary, mode='publish', released=True, version=clone['name'], release=release['name'],
                 configPreserved=True, publicBytesVerified=True)
 
